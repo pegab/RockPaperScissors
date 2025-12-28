@@ -1,0 +1,265 @@
+//
+//  ContentView.swift
+//  RockPaperScissors
+//
+//  Created by Peter Gabriel on 28.12.25.
+//
+
+import SwiftUI
+
+struct ContentView: View {
+    
+    
+    @State private var values = ["Rock", "Paper", "Scissors"]
+    
+    @State private var startValue = Int.random(in: 0...2)
+    @State private var winOrLoose = Bool.random()
+    @State private var score = 0
+    @State private var endOfGame = false
+    @State private var endOfGameTitle = "END OF GAME"
+    @State private var maxQuestions: Int = 0
+    
+    
+    
+    var body: some View {
+        
+        NavigationStack {
+          
+            
+            ZStack{
+                LinearGradient(colors: [.blue, .brown] , startPoint: .top, endPoint: .bottom)
+                    .ignoresSafeArea()
+          
+               
+                
+                Section(){
+                    VStack(spacing: 50){
+                        
+                        Spacer()
+                        
+                        Text("Score: \(score)")
+                            .font(.title)
+                            .fontWeight(.bold)
+                        
+                        if values[startValue] == "Rock" {
+                            Text("🪨")
+                                .font(.largeTitle)
+                            
+                        } else if values[startValue] == "Paper" {
+                            Text("📄")
+                                .font(.largeTitle)
+                        } else {
+                            Text("✂️")
+                                .font(.largeTitle)
+                        }
+                        
+                        
+                        if winOrLoose {
+                            Text("Try to win")
+                                .font(.title2)
+                                .fontWeight(.bold)
+                                .foregroundStyle(.green)
+                        } else {
+                            Text("Try to loose")
+                                .font(.title2)
+                                .fontWeight(.bold)
+                                .foregroundStyle(.red)
+                        }
+                        
+                        Spacer()
+                        
+                        HStack{
+                            Button(action: winOrLoose ? rocking : notRocking) {
+                                Text("🪨")
+                                    .padding()
+                                    .background(.ultraThickMaterial)
+                                    .frame(minWidth: 30, maxWidth: 70)
+                                    .clipShape(.circle)
+                            }
+                            
+                            Button(action: winOrLoose ? papering : notPapering) {
+                                Text("📄")
+                                    .padding()
+                                    .background(.ultraThickMaterial)
+                                    .frame(minWidth: 30, maxWidth: 70)
+                                    .clipShape(.circle)
+                            }
+                            
+                            Button(action: winOrLoose ? scissoring : notScissoring) {
+                                Text("✂️")
+                                    .padding()
+                                    .background(.ultraThickMaterial)
+                                    .frame(minWidth: 30, maxWidth: 70)
+                                    .clipShape(.circle)
+                            }
+                            
+                        }
+                        
+                        Spacer()
+                        
+                        
+                    }
+                }
+                
+                .alert(endOfGameTitle, isPresented: $endOfGame) {
+                    Button("New Game", action: restartGame)
+                } message: {
+                    Text("You ve managed a score of \(score)")
+                }
+            
+            }
+        }
+        
+    }
+    
+    
+    func rocking() {
+        
+        if startValue == 0 {
+            score = score
+            startValue = Int.random(in: 0...2)
+            winOrLoose.toggle()
+        } else if startValue == 1 {
+            score -= 1
+            startValue = Int.random(in: 0...2)
+            winOrLoose.toggle()
+        } else {
+            score += 1
+            startValue = Int.random(in: 0...2)
+            winOrLoose.toggle()
+        }
+        
+        maxQuestions += 1
+        
+        if maxQuestions == 5 {
+            endOfGame = true
+        }
+    }
+    
+    func notRocking() {
+        if startValue == 0 {
+            score = score
+            startValue = Int.random(in: 0...2)
+            winOrLoose.toggle()
+        } else if startValue == 1 {
+            score += 1
+            startValue = Int.random(in: 0...2)
+            winOrLoose.toggle()
+        } else {
+            score -= 1
+            startValue = Int.random(in: 0...2)
+            winOrLoose.toggle()
+        }
+        
+        maxQuestions += 1
+        
+        if maxQuestions == 5 {
+            endOfGame = true
+        }
+
+    }
+    
+    func papering() {
+        if startValue == 0 {
+            score += 1
+            startValue = Int.random(in: 0...2)
+            winOrLoose.toggle()
+        } else if startValue == 1 {
+            score = score
+            startValue = Int.random(in: 0...2)
+            winOrLoose.toggle()
+        } else {
+            score -= 1
+            startValue = Int.random(in: 0...2)
+            winOrLoose.toggle()
+        }
+        
+        maxQuestions += 1
+        
+        if maxQuestions == 5 {
+            endOfGame = true
+        }
+
+    }
+    
+    func notPapering() {
+        if startValue == 0 {
+            score -= 1
+            startValue = Int.random(in: 0...2)
+            winOrLoose.toggle()
+        } else if startValue == 1 {
+            score = score
+            startValue = Int.random(in: 0...2)
+            winOrLoose.toggle()
+        } else {
+            score += 1
+            startValue = Int.random(in: 0...2)
+            winOrLoose.toggle()
+        }
+        
+        maxQuestions += 1
+        
+        if maxQuestions == 5 {
+            endOfGame = true
+        }
+
+    }
+    
+    
+    func scissoring() {
+        if startValue == 0 {
+            score -= 1
+            startValue = Int.random(in: 0...2)
+            winOrLoose.toggle()
+        } else if startValue == 1 {
+            score += 1
+            startValue = Int.random(in: 0...2)
+            winOrLoose.toggle()
+        } else {
+            score = score
+            startValue = Int.random(in: 0...2)
+            winOrLoose.toggle()
+        }
+        
+        maxQuestions += 1
+        
+        if maxQuestions == 5 {
+            endOfGame = true
+        }
+
+    }
+    
+    func notScissoring() {
+        if startValue == 0 {
+            score += 1
+            startValue = Int.random(in: 0...2)
+            winOrLoose.toggle()
+        } else if startValue == 1 {
+            score -= 1
+            startValue = Int.random(in: 0...2)
+            winOrLoose.toggle()
+        } else {
+            score = score
+            startValue = Int.random(in: 0...2)
+            winOrLoose.toggle()
+        }
+        maxQuestions += 1
+        
+        if maxQuestions == 5 {
+            endOfGame = true
+        }
+
+    }
+    
+    func restartGame() {
+        score = 0
+        maxQuestions = 0
+        startValue = Int.random(in: 0...2)
+        winOrLoose.toggle()
+    }
+   
+}
+
+#Preview {
+    ContentView()
+}
