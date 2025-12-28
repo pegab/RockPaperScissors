@@ -23,14 +23,13 @@ struct ContentView: View {
     
     var body: some View {
         
-        NavigationStack {
+
           
             
             ZStack{
-                LinearGradient(colors: [.blue, .brown] , startPoint: .top, endPoint: .bottom)
+                /*LinearGradient(colors: [.blue, .brown] , startPoint: .top, endPoint: .bottom)
                     .ignoresSafeArea()
-          
-               
+          */
                 
                 Section(){
                     VStack(spacing: 50){
@@ -40,6 +39,7 @@ struct ContentView: View {
                         Text("Score: \(score)")
                             .font(.title)
                             .fontWeight(.bold)
+                            .foregroundStyle(.white)
                         
                         if values[startValue] == "Rock" {
                             Text("🪨")
@@ -68,28 +68,28 @@ struct ContentView: View {
                         
                         Spacer()
                         
-                        HStack{
+                        HStack (spacing: 20){
                             Button(action: winOrLoose ? rocking : notRocking) {
                                 Text("🪨")
+                                    .font(.largeTitle)
                                     .padding()
-                                    .background(.ultraThickMaterial)
-                                    .frame(minWidth: 30, maxWidth: 70)
+                                    .background(.ultraThinMaterial)
                                     .clipShape(.circle)
                             }
                             
                             Button(action: winOrLoose ? papering : notPapering) {
                                 Text("📄")
+                                    .font(.largeTitle)
                                     .padding()
-                                    .background(.ultraThickMaterial)
-                                    .frame(minWidth: 30, maxWidth: 70)
+                                    .background(.ultraThinMaterial)
                                     .clipShape(.circle)
                             }
                             
                             Button(action: winOrLoose ? scissoring : notScissoring) {
                                 Text("✂️")
+                                    .font(.largeTitle)
                                     .padding()
-                                    .background(.ultraThickMaterial)
-                                    .frame(minWidth: 30, maxWidth: 70)
+                                    .background(.ultraThinMaterial)
                                     .clipShape(.circle)
                             }
                             
@@ -99,7 +99,9 @@ struct ContentView: View {
                         
                         
                     }
+                    
                 }
+            
                 
                 .alert(endOfGameTitle, isPresented: $endOfGame) {
                     Button("New Game", action: restartGame)
@@ -108,8 +110,9 @@ struct ContentView: View {
                 }
             
             }
-        }
-        
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(.black.gradient)
+   
     }
     
     
