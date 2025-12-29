@@ -43,27 +43,33 @@ struct ContentView: View {
                         
                         if values[startValue] == "Rock" {
                             Text("🪨")
-                                .font(.largeTitle)
+                                .font(.system(size: 150))
                             
                         } else if values[startValue] == "Paper" {
                             Text("📄")
-                                .font(.largeTitle)
+                                .font(.system(size: 150))
                         } else {
                             Text("✂️")
-                                .font(.largeTitle)
+                                .font(.system(size: 150))
                         }
                         
                         
                         if winOrLoose {
-                            Text("Try to win")
+                            Text("Which one wins?")
+                                .padding()
                                 .font(.title2)
                                 .fontWeight(.bold)
                                 .foregroundStyle(.green)
+                                .background(.ultraThinMaterial)
+                                .clipShape(.capsule)
                         } else {
-                            Text("Try to loose")
+                            Text("Which one loses?")
+                                .padding()
                                 .font(.title2)
                                 .fontWeight(.bold)
                                 .foregroundStyle(.red)
+                                .background(.ultraThinMaterial)
+                                .clipShape(.capsule)
                         }
                         
                         Spacer()
@@ -118,16 +124,12 @@ struct ContentView: View {
     
     func rocking() {
         
-        if startValue == 0 {
-            score = score
-            startValue = Int.random(in: 0...2)
-            winOrLoose.toggle()
-        } else if startValue == 1 {
-            score -= 1
+        if startValue == 2 {
+            score += 1
             startValue = Int.random(in: 0...2)
             winOrLoose.toggle()
         } else {
-            score += 1
+            score -= 1
             startValue = Int.random(in: 0...2)
             winOrLoose.toggle()
         }
@@ -140,11 +142,7 @@ struct ContentView: View {
     }
     
     func notRocking() {
-        if startValue == 0 {
-            score = score
-            startValue = Int.random(in: 0...2)
-            winOrLoose.toggle()
-        } else if startValue == 1 {
+      if startValue == 1 {
             score += 1
             startValue = Int.random(in: 0...2)
             winOrLoose.toggle()
@@ -163,12 +161,8 @@ struct ContentView: View {
     }
     
     func papering() {
-        if startValue == 0 {
+       if startValue == 0 {
             score += 1
-            startValue = Int.random(in: 0...2)
-            winOrLoose.toggle()
-        } else if startValue == 1 {
-            score = score
             startValue = Int.random(in: 0...2)
             winOrLoose.toggle()
         } else {
@@ -186,16 +180,12 @@ struct ContentView: View {
     }
     
     func notPapering() {
-        if startValue == 0 {
-            score -= 1
-            startValue = Int.random(in: 0...2)
-            winOrLoose.toggle()
-        } else if startValue == 1 {
-            score = score
+        if startValue == 2 {
+            score += 1
             startValue = Int.random(in: 0...2)
             winOrLoose.toggle()
         } else {
-            score += 1
+            score -= 1
             startValue = Int.random(in: 0...2)
             winOrLoose.toggle()
         }
@@ -210,16 +200,12 @@ struct ContentView: View {
     
     
     func scissoring() {
-        if startValue == 0 {
-            score -= 1
-            startValue = Int.random(in: 0...2)
-            winOrLoose.toggle()
-        } else if startValue == 1 {
+        if startValue == 1 {
             score += 1
             startValue = Int.random(in: 0...2)
             winOrLoose.toggle()
         } else {
-            score = score
+            score -= 1
             startValue = Int.random(in: 0...2)
             winOrLoose.toggle()
         }
@@ -237,12 +223,8 @@ struct ContentView: View {
             score += 1
             startValue = Int.random(in: 0...2)
             winOrLoose.toggle()
-        } else if startValue == 1 {
-            score -= 1
-            startValue = Int.random(in: 0...2)
-            winOrLoose.toggle()
         } else {
-            score = score
+            score -= 1
             startValue = Int.random(in: 0...2)
             winOrLoose.toggle()
         }
