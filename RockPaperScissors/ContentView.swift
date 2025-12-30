@@ -23,15 +23,11 @@ struct ContentView: View {
     
     var body: some View {
         
-
-          
-            
             ZStack{
                 /*LinearGradient(colors: [.blue, .brown] , startPoint: .top, endPoint: .bottom)
                     .ignoresSafeArea()
           */
-                
-                Section(){
+               
                     VStack(spacing: 50){
                         
                         Spacer()
@@ -76,6 +72,7 @@ struct ContentView: View {
                         
                         
                         HStack (spacing: 20){
+                            //winorloose bool entscheidet welche func vom Button ausgeführt wird
                             Button(action: winOrLoose ? rocking : notRocking) {
                                 Text("🪨")
                                     .font(.largeTitle)
@@ -107,18 +104,17 @@ struct ContentView: View {
                         
                     }
                     
-                }
-            
-                
-                .alert(endOfGameTitle, isPresented: $endOfGame) {
-                    Button("New Game", action: restartGame)
-                } message: {
-                    Text("You ve managed a score of \(score)")
-                }
             
             }
+        //mittels zstack wird der hintergrund gestaltet...der zstack ist immer die unterste ebene
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(.black.gradient)
+        //der zstack ist auch der highest stable container und somit wird der viewmodifier .alert hier angehängt
+            .alert(endOfGameTitle, isPresented: $endOfGame) {
+                Button("New Game", action: restartGame)
+            } message: {
+                Text("You ve managed a score of \(score)")
+            }
    
     }
     
