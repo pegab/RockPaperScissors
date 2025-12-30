@@ -41,6 +41,8 @@ struct ContentView: View {
                             .fontWeight(.bold)
                             .foregroundStyle(.white)
                         
+                        Spacer()
+                        
                         if values[startValue] == "Rock" {
                             Text("🪨")
                                 .font(.system(size: 150))
@@ -53,26 +55,25 @@ struct ContentView: View {
                                 .font(.system(size: 150))
                         }
                         
+                        Spacer()
                         
                         if winOrLoose {
                             Text("Which one wins?")
                                 .padding()
-                                .font(.title2)
+                                .font(.largeTitle)
                                 .fontWeight(.bold)
                                 .foregroundStyle(.green)
-                                .background(.ultraThinMaterial)
-                                .clipShape(.capsule)
+                                
                         } else {
                             Text("Which one loses?")
                                 .padding()
-                                .font(.title2)
+                                .font(.largeTitle)
                                 .fontWeight(.bold)
                                 .foregroundStyle(.red)
-                                .background(.ultraThinMaterial)
-                                .clipShape(.capsule)
+                                
                         }
                         
-                        Spacer()
+                        
                         
                         HStack (spacing: 20){
                             Button(action: winOrLoose ? rocking : notRocking) {
