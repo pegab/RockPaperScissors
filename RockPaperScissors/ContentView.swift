@@ -118,7 +118,16 @@ struct ContentView: View {
    
     }
     
-    
+    /*die funcs funktionieren wie folgt:
+     
+     es wird überprüft welcher startvalue angezeigt wird (der startvalue gibt an welches symbol der computer ausgewählt hat)
+     0 = stein, 1 = papier, 2 = schere
+     
+     rocking/not rocking werden getriggert wenn man den rock button drückt, usw.
+     
+     also wenn der computer die schere auswählt und die frage which one wins, dann nimmt der user um zu gewinnen den rock button -> dieser triggert die func rocking (da gefragt wurde which one wins?)
+     rocking übeprüft nun ob der user richtig liegt, der rock gewinnt wenn der computer 2 also die schere gewählt hat, da dem so war bekommt der user einen punkt und der startValue wird wieder randomisiert, dh der computer wählt ein neues Symbol und die Frage win or lose wird getoggelt.
+    */
     func rocking() {
         
         if startValue == 2 {
